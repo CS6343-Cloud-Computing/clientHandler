@@ -4,9 +4,9 @@ services:
        image: 'redis:alpine'
        ports:
             - '6379:6379'
-    nodeserver:
+    managerbackend:
         build:
-            context: ./nodeManager
+            context: ./managerBackend
         ports:
             - "5000:5000"
     nginx:
@@ -15,4 +15,5 @@ services:
         ports:
             - "80:80"
         depends_on:
-            - nodeserver
+            - managerbackend
+            - redis
