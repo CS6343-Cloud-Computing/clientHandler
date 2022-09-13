@@ -13,7 +13,7 @@ services:
         build:
             context: ./managerfrontend
         ports:
-            - "5001:5000"
+            - "5001:3000"
     nginx:
         build:
             context: ./nginx
