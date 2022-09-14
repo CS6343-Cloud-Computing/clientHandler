@@ -30,22 +30,24 @@ function Login() {
                 alignItems="center"
                 rowSpacing={2}
               >
-                <Typography variant="h5" sx={{ my: 2 }}>
-                  Workflow Login
+                <Typography sx={{ mt: 2, fontFamily: 'sans-serif', fontSize: '25px' }}>
+                  WorkBoard
+                </Typography>
+                <Typography variant="caption">
+                 the <b>w</b>orkflow dash<b>b</b>oard
                 </Typography>
                 <TextField
                   id="outlined-basic"
                   label="Username"
                   variant="outlined"
-                  margin="normal"
+                  margin="dense"
                 />
-
                 <TextField
                   id="outlined-basic"
                   label="Password"
                   variant="outlined"
+                  margin="dense"
                 />
-
                 <ButtonGroup
                   orientation="horizontal"
                   aria-label="vertical outlined button group"
