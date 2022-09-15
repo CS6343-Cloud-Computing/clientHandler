@@ -1,6 +1,6 @@
 # pull the Node.js Docker image
 FROM node:alpine
-
+RUN apk add g++ make py3-pip
 # create the directory inside the container
 WORKDIR /usr/src/app
 

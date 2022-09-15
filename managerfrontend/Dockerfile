@@ -1,17 +1,15 @@
-# pull the Node.js Docker image
-FROM node:alpine
+# build environment
+FROM node:13.12.0-alpine as build
+WORKDIR /app
+ENV PATH /app/node_modules/.bin:$PATH
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm ci --silent
+COPY . ./
+RUN npm run build
 
-# create the directory inside the container
-WORKDIR /usr/src/app
-
-# copy the package.json files from local machine to the workdir in container
-COPY package*.json ./
-
-# run npm install in our local machine
-RUN npm install
-
-# copy the generated modules and all other files to the container
-COPY . .
-
-# the command that starts our app
-CMD ["npm", "start"]
+FROM nginx:stable-alpine
+COPY --from=build /app/build /usr/share/nginx/html
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

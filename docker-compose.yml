@@ -13,13 +13,4 @@ services:
         build:
             context: ./managerfrontend
         ports:
-            - "5001:3000"
-    nginx:
-        build:
-            context: ./nginx
-        ports:
-            - "80:80"
-        depends_on:
-            - managerbackend
-            - managerfrontend
-            - redis
+            - '80:80'
