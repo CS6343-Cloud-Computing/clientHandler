@@ -21,9 +21,11 @@ const User = connection.define("User", {
 });
 
 // configure the app to use bodyParser()
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 app.use(bodyParser.json());
 
 app.post("/register", async (req, res) => {
@@ -33,44 +35,37 @@ app.post("/register", async (req, res) => {
       let hashPassword = await bcrypt.hash(req.body.password, 10);
 
       let newUser = {
-        id: Date.now(),
         username: req.body.username,
-        email: req.body.email,
         password: hashPassword,
       };
-      users.push(newUser);
-      console.log("User list", users);
 
-      // res.send("<div align ='center'><h2>Registration successful</h2></div><br><br><div align='center'><a href='./login.html'>login</a></div><br><br><div align='center'><a href='./registration.html'>Register another user</a></div>");
+      User.create(newUser);
+
+      res.status(200).send({ message: "user created" });
     } else {
-      // res.send("<div align ='center'><h2>Email already used</h2></div><br><br><div align='center'><a href='./registration.html'>Register again</a></div>");
+      res.status(201).send({ message: "user already exists" });
     }
   } catch {
-    res.send("Internal server error");
+    res.status(400).json("404 - no user exists in db to update");
   }
 });
 
 app.post("/login", async (req, res) => {
   try {
-	console.log(req)
-    const foundUser = await User.findOne({ where: { username: req.body.username } });
+    const foundUser = await User.findOne({
+      where: { username: req.body.username },
+    });
     if (foundUser) {
-		console.log(foundUser)
-		console.log("found")
       let submittedPass = req.body.password;
       let storedPass = foundUser.password;
 
       const passwordMatch = await bcrypt.compare(submittedPass, storedPass);
       if (passwordMatch) {
         let usrname = foundUser.username;
-        // res.send(`<div align ='center'><h2>login successful</h2></div><br><br><br><div align ='center'><h3>Hello ${usrname}</h3></div><br><br><div align='center'><a href='./login.html'>logout</a></div>`);
       } else {
-        // res.send("<div align ='center'><h2>Invalid email or password</h2></div><br><br><div align ='center'><a href='./login.html'>login again</a></div>");
       }
     } else {
-      res.send(
-        "<div align ='center'><h2>Invalid email or password</h2></div><br><br><div align='center'><a href='./login.html'>login again<a><div>"
-      );
+      res.send();
     }
   } catch {
     res.send("Internal server error");
