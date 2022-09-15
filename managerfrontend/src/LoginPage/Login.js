@@ -44,7 +44,7 @@ function Login() {
 
     setToken({"token": "123"});
 
-    navigate("/dashboard");
+    navigate("/");
   }
 
   function signupAction() {
