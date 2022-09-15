@@ -14,11 +14,14 @@ import Alert from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
 import Collapse from "@mui/material/Collapse";
 // import CloseIcon from '@mui/icons-material/Close';
+import useToken from "../Helper/useToken";
+import { Navigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
+  const { setToken } = useToken();
 
   function loginAction() {
     const url = "/login";
@@ -37,6 +40,9 @@ function Login() {
       .catch((error) => {
         console.log(error);
       });
+
+    setToken({"token": "123"});
+    <Navigate to="/dashboard" />;
   }
 
   function signupAction() {
@@ -52,12 +58,11 @@ function Login() {
       .post(url, formData, config)
       .then((response) => {
         console.log(response);
-        
       })
       .catch((error) => {
         console.log(error);
       });
-      setOpen(true)
+    setOpen(true);
   }
 
   return (
@@ -70,7 +75,9 @@ function Login() {
                 aria-label="close"
                 color="inherit"
                 size="small"
-                onClick={() => {setOpen(false)}}
+                onClick={() => {
+                  setOpen(false);
+                }}
               >
                 {/* <CloseIcon fontSize="inherit" /> */}
               </IconButton>
