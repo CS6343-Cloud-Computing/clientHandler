@@ -15,13 +15,14 @@ import IconButton from "@mui/material/IconButton";
 import Collapse from "@mui/material/Collapse";
 // import CloseIcon from '@mui/icons-material/Close';
 import useToken from "../Helper/useToken";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
   const { setToken } = useToken();
+  let navigate = useNavigate(); 
 
   function loginAction() {
     const url = "/login";
@@ -42,7 +43,8 @@ function Login() {
       });
 
     setToken({"token": "123"});
-    <Navigate to="/dashboard" />;
+
+    navigate("/dashboard");
   }
 
   function signupAction() {
