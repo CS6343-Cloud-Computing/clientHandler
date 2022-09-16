@@ -6,9 +6,10 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ProtectedRoute } from "./Helper/ProtectedRoute";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+
 function App() {
   return (
-    <Box flexGrow={1}>
+    <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <BrowserRouter>
         <Routes>
