@@ -21,6 +21,8 @@ const Home = () => {
     const fileUploaded = event.target.files[0];
     const config = {
       headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Method": "POST",
         "Contetnt-Type": "multipart/form-data",
       },
     };
@@ -28,9 +30,11 @@ const Home = () => {
     const formData = new FormData();
     formData.append("file", fileUploaded);
     console.log(fileUploaded);
-    axios.post("http://localhost:8000/config/upload", formData, config).then((res) => {
-      console.log(res);
-    });
+    axios
+      .post("http://localhost:8000/config/upload", formData, config)
+      .then((res) => {
+        console.log(res);
+      });
   };
   return (
     <>
