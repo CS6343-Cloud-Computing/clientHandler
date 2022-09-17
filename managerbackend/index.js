@@ -70,6 +70,10 @@ app.post("/api/config/upload", upload.single("file"), (req, res, next) => {
 
 app.use('/api',loginRoutes )
 
+app.get("/api", (req, res) =>{
+  res.send("hello");
+})
+
 connection
   .sync({
     logging: console.log,
