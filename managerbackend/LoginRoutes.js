@@ -3,15 +3,15 @@ const router = express.Router();
 const Sequelize = require("sequelize");
 const bcrypt = require("bcrypt");
 
-const User = connection.define("User", {
-  username: Sequelize.STRING,
-  password: Sequelize.STRING,
-});
-
 const connection = new Sequelize("db", null, null, {
   host: "localhost",
   dialect: "sqlite",
   storage: "database.sqlite",
+});
+
+const User = connection.define("User", {
+  username: Sequelize.STRING,
+  password: Sequelize.STRING,
 });
 
 router.post("/register", async (req, res) => {

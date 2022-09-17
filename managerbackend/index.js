@@ -6,7 +6,7 @@ const multer = require("multer");
 const cors = require('cors')
 const app = express();
 const server = http.createServer(app);
-
+const loginRoutes = require('./LoginRoutes')
 const storage = multer.diskStorage({
   destination: (req, file, callBack) => {
     callBack(null, "uploads");
@@ -29,7 +29,7 @@ app.use(cors())
 
 
 
-app.post("/config/upload", upload.single("file"), (req, res, next) => {
+app.post("/api/config/upload", upload.single("file"), (req, res, next) => {
   const file = req.file;
   console.log(file);
   if (!file) {
@@ -41,7 +41,7 @@ app.post("/config/upload", upload.single("file"), (req, res, next) => {
   res.send(file);
 });
 
-
+app.use('/api',loginRoutes )
 
 server.listen(8000, function () {
   console.log("server is listening on port: 8000");
