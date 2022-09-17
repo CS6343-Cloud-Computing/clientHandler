@@ -6,18 +6,19 @@ const bodyParser = require("body-parser");
 const users = require("./data").userDB;
 const Sequelize = require("sequelize");
 const multer = require("multer");
+const cors = require('cors')
 
 const app = express();
 const server = http.createServer(app);
 const storage = multer.diskStorage({
   destination: (req, file, callBack) => {
-      callBack(null, 'uploads')
+    callBack(null, "uploads");
   },
   filename: (req, file, callBack) => {
-      callBack(null, `${file.originalname}`)
-  }
-})
-let upload = multer({ dest: 'uploads/' })
+    callBack(null, `${file.originalname}`);
+  },
+});
+let upload = multer({ dest: "uploads/" });
 const connection = new Sequelize("db", null, null, {
   host: "localhost",
   dialect: "sqlite",
@@ -36,6 +37,7 @@ app.use(
   })
 );
 app.use(bodyParser.json());
+app.use(cors())
 
 app.post("/register", async (req, res) => {
   try {
@@ -81,16 +83,17 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post('/config/upload', upload.single('file'), (req, res, next) => {
+app.post("/config/upload", upload.single("file"), (req, res, next) => {
   const file = req.file;
   console.log(file);
   if (!file) {
-    const error = new Error('No File')
-    error.httpStatusCode = 400
-    return next(error)
+    console.log("hi");
+    const error = new Error("No File");
+    error.httpStatusCode = 400;
+    return next(error);
   }
-    res.send(file);
-})
+  res.send(file);
+});
 
 connection
   .sync({
