@@ -21,8 +21,6 @@ const Home = () => {
     const fileUploaded = event.target.files[0];
     const config = {
       headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Method": "POST",
         "Contetnt-Type": "multipart/form-data",
       },
     };
