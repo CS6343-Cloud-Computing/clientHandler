@@ -27,8 +27,6 @@ app.use(
 app.use(bodyParser.json());
 app.use(cors())
 
-
-
 app.post("/api/config/upload", upload.single("file"), (req, res, next) => {
   const file = req.file;
   console.log(file);
