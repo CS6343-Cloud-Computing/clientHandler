@@ -16,13 +16,15 @@ import Collapse from "@mui/material/Collapse";
 // import CloseIcon from '@mui/icons-material/Close';
 import useToken from "../Helper/useToken";
 import { useNavigate } from "react-router-dom";
+import utd from "../Images/utd.png";
+import cs from "../Images/cs6343.png";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
   const { setToken } = useToken();
-  let navigate = useNavigate(); 
+  let navigate = useNavigate();
 
   function loginAction() {
     const url = "/login";
@@ -42,7 +44,7 @@ function Login() {
         console.log(error);
       });
 
-    setToken({"token": "123"});
+    setToken({ token: "123" });
 
     navigate("/");
   }
@@ -100,55 +102,69 @@ function Login() {
           columnSpacing={2}
           direction="row"
           alignItems="center"
-          justifyContent="center"
+          justifyContent="space-between"
           style={{ minHeight: "100vh" }}
         >
-          <Card sx={{ p: 2 }}>
-            <CardContent>
-              <Grid
-                container
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-                rowSpacing={2}
-              >
-                <Typography
-                  sx={{ mt: 2, fontFamily: "sans-serif", fontSize: "25px" }}
+          <Grid item>
+            <img src={utd} height="100%" width="300px"  style={{ filter: "drop-shadow(5px 0px 5px)" }} alt="comet"/>
+          </Grid>
+          <Grid item>
+            <Card sx={{ p: 2 }}>
+              <CardContent>
+                <Grid
+                  container
+                  direction="column"
+                  justifyContent="center"
+                  alignItems="center"
+                  rowSpacing={2}
                 >
-                  WorkBoard
-                </Typography>
-                <Typography variant="caption">
-                  the <b>w</b>orkflow dash<b>b</b>oard
-                </Typography>
-                <TextField
-                  id="outlined-basic"
-                  label="Username"
-                  variant="outlined"
-                  margin="dense"
-                  onChange={(event) => setUsername(event.target.value)}
-                />
-                <TextField
-                  id="outlined-basic"
-                  label="Password"
-                  variant="outlined"
-                  margin="dense"
-                  onChange={(event) => setPassword(event.target.value)}
-                />
-                <ButtonGroup
-                  orientation="horizontal"
-                  aria-label="vertical outlined button group"
-                  sx={{ my: 2 }}
-                >
-                  <Button variant="contained" onClick={() => loginAction()}>
-                    Login
-                  </Button>
-                  <Button variant="contained" onClick={() => signupAction()}>
-                    Signup
-                  </Button>
-                </ButtonGroup>
-              </Grid>
-            </CardContent>
-          </Card>
+                  <Typography
+                    sx={{ mt: 2, fontFamily: "sans-serif", fontSize: "25px" }}
+                  >
+                    WorkBoard
+                  </Typography>
+                  <Typography variant="caption">
+                    the <b>w</b>orkflow dash<b>b</b>oard
+                  </Typography>
+                  <TextField
+                    id="outlined-basic"
+                    label="Username"
+                    variant="outlined"
+                    margin="dense"
+                    onChange={(event) => setUsername(event.target.value)}
+                  />
+                  <TextField
+                    id="outlined-basic"
+                    label="Password"
+                    variant="outlined"
+                    margin="dense"
+                    onChange={(event) => setPassword(event.target.value)}
+                  />
+                  <ButtonGroup
+                    orientation="horizontal"
+                    aria-label="vertical outlined button group"
+                    sx={{ my: 2 }}
+                  >
+                    <Button variant="contained" onClick={() => loginAction()}>
+                      Login
+                    </Button>
+                    <Button variant="contained" onClick={() => signupAction()}>
+                      Signup
+                    </Button>
+                  </ButtonGroup>
+                </Grid>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item>
+            <img
+              src={cs}
+              height="100%"
+              width="300px"
+              style={{ filter: "drop-shadow(5px 0px 5px)" }}
+              alt="CS6343"
+            />
+          </Grid>
         </Grid>
       </Box>
     </Container>

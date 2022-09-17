@@ -49,7 +49,7 @@ const MiniDrawer = styled(Drawer, {
 }));
 
 function NavBar() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   return (
     <MiniDrawer variant="permanent" open={open}>
       <Box

@@ -1,11 +1,30 @@
 import React from "react";
-import styled from "styled-components";
 import NavBar from "../Helper/NavBar";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
 import Button from "@mui/material/Button";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+
+function createData(name, calories, fat) {
+  return { name, calories, fat };
+}
+
+const rows = [
+  createData("workflow-7", "In Progress", "17th Sept 2022"),
+  createData("workflow-5", "In Queue", "17th Sept 2022"),
+  createData("workflow-3", "In Queue", "16th Sept 2022"),
+  createData("workflow-2", "Completed", "16th Sept 2022"),
+  createData("workflow-1", "Completed", "15th Sept 2022"),
+];
+
 const Home = () => {
   // Create a reference to the hidden file input element
   const hiddenFileInput = React.useRef(null);
@@ -40,7 +59,7 @@ const Home = () => {
       <Container maxWidth={false} disableGutters={true}>
         <Box px={3} pb={1} sx={{ bgcolor: "#E1E1E1" }}>
           <Grid container direction="column" style={{ minHeight: "100vh" }}>
-            <Grid item>
+            <Grid item p={2}>
               <input
                 type="file"
                 accept=".yml"
@@ -54,6 +73,35 @@ const Home = () => {
                   Upload File
                 </Button>
               </label>
+            </Grid>
+            <Grid item p={2}>
+              <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Workflow Name</TableCell>
+                      <TableCell align="right">Status</TableCell>
+                      <TableCell align="right">Date Created</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <TableRow
+                        key={row.name}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <TableCell component="th" scope="row">
+                          {row.name}
+                        </TableCell>
+                        <TableCell align="right">{row.calories}</TableCell>
+                        <TableCell align="right">{row.fat}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </Grid>
           </Grid>
         </Box>
