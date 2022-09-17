@@ -29,7 +29,7 @@ const Home = () => {
     formData.append("file", fileUploaded);
     console.log(fileUploaded);
     axios
-      .post("http://10.176.67.96:8000/api/config/upload", formData, config)
+      .post("http://localhost:8000/api/config/upload", formData, config)
       .then((res) => {
         console.log(res);
       });
