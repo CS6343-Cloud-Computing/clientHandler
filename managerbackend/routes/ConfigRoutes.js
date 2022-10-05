@@ -1,18 +1,5 @@
-const express = require("express");
-const router = express.Router();
-const Sequelize = require("sequelize");
-const bcrypt = require("bcrypt");
-
-const connection = new Sequelize("db", null, null, {
-  host: "localhost",
-  dialect: "sqlite",
-  storage: "database.sqlite",
-});
-
-const User = connection.define("User", {
-  username: Sequelize.STRING,
-  password: Sequelize.STRING,
-});
+import { Router } from "express";
+const router = Router();
 
 router.post("/register", async (req, res) => {
   try {
@@ -58,15 +45,28 @@ router.post("/login", async (req, res) => {
   }
 });
 
-connection
-  .sync({
-    logging: console.log,
-  })
-  .then(() => {
-    console.log("Connection to database established successfully.");
-  })
-  .catch((err) => {
-    console.log("Unable to connect to the database: ", err);
-  });
+app.post("/api/config/upload", upload.single("file"), (req, res, next) => {
+  const file = req.file;
+  console.log(file);
+  if (!file) {
+    console.log("hi");
+    const error = new Error("No File");
+    error.httpStatusCode = 400;
+    return next(error);
+  }
+  const filename = file.filename;
+  let fileContents = fs.readFileSync('./uploads/' + filename, 'utf8');
+  let data = yaml.load(fileContents);
+  console.log(data);
+  let newUserConfig = {
+    userName: data.userName,
+    workflowName: data.workflowName,
+    dataType: data.dataType,
+    dataSource: data.dataSource,
+    workflowComponents: data.workflowComponents
+  };
+  UserConfig.create(newUserConfig);
+  res.send(file);
+});
 
-module.exports = router;
+export default router;

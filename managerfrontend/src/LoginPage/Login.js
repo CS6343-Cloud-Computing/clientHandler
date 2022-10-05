@@ -94,7 +94,7 @@ function Login() {
               marginRigt: "auto",
             }}
           >
-            Registration successfully completed!
+            Registration successfully completed, 2343294792374!
           </Alert>
         </Collapse>
         <Grid
